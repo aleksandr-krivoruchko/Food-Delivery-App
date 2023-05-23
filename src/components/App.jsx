@@ -1,4 +1,6 @@
 import React from "react";
+import styled from "styled-components";
+
 import { Routes, Route } from "react-router-dom";
 import Shop from "../pages/Shop";
 import ShoppingCart from "../pages/ShoppingCart";
@@ -6,9 +8,15 @@ import NotFoundPage from "../pages/NotFoundPage";
 import Layout from "./Layout";
 import Navigation from "./Navigation";
 
+const Container = styled.div`
+  width: 1200px;
+  height: auto;
+  margin: 0 auto;
+`;
+
 const App = () => {
   return (
-    <>
+    <Container>
       <Navigation />
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -17,7 +25,7 @@ const App = () => {
           <Route path="*" element={<NotFoundPage />}></Route>
         </Route>
       </Routes>
-    </>
+    </Container>
   );
 };
 
