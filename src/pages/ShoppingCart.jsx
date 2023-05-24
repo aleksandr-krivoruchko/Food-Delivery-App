@@ -5,19 +5,22 @@ import { useCart } from "react-use-cart";
 import CartList from "../components/CartList";
 import OrderForm from "../components/Form";
 
-const Container = styled.div``;
-const Flex = styled.div`
+const Container = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: start;
+  height: 85vh;
+`;
+const Wrapper = styled.div`
+  width: 50%;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 80vh;
 `;
 
 const Title = styled.h1`
-  text-align: right;
-  margin-top: 1rem;
-  margin-right: 3rem;
+  text-align: left;
+  margin-left: 5rem;
 `;
 const Message = styled.p`
   font-size: 2rem;
@@ -28,21 +31,39 @@ const Message = styled.p`
 const ShoppingCart = () => {
   const { isEmpty, items } = useCart();
 
+  const calcTotalAmount = items.reduce((total, item) => {
+    return total + item.itemTotal;
+  }, 0);
+
+  const orderedProducts = () => {
+    const obj = {};
+    items.map((item) => (obj[item.title] = item.quantity));
+    return obj;
+  };
+
+  const handleSubmit = (values, actions) => {
+    const prod = orderedProducts();
+    const order = {
+      ...values,
+      products: prod,
+      orderPrice: `${calcTotalAmount}$`,
+    };
+    console.log(order);
+    actions.resetForm();
+  };
+
   if (isEmpty) return <Message>Your cart is empty</Message>;
 
   return (
     <Container>
-      <Flex>
-        <OrderForm />
-        <CartList products={items}></CartList>
-      </Flex>
-      <Title>
-        Total price:
-        {items.reduce((total, item) => {
-          return total + item.price * item.quantity;
-        }, 0)}
-        $
-      </Title>
+      <Wrapper>
+        <OrderForm handleSubmit={handleSubmit} />
+        <Title>
+          Total price:
+          {calcTotalAmount}$
+        </Title>
+      </Wrapper>
+      <CartList products={items}></CartList>
     </Container>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { CartProvider, useCart } from "react-use-cart";
+import { CartProvider } from "react-use-cart";
 
 import { Routes, Route } from "react-router-dom";
 import Shop from "../pages/Shop";

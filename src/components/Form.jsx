@@ -15,24 +15,25 @@ const schema = Yup.object().shape({
 });
 
 const Section = styled.div`
-  width: 50%;
+  width: 100%;
   height: auto;
   padding: 1rem;
+  margin: 1rem;
 `;
 
 const Title = styled.h2`
   text-align: center;
+  margin-bottom: 1rem;
 `;
 
 const StyledForm = styled(Form)`
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
-  border: 1px solid red;
 `;
 const Label = styled.label`
-  display: block;
   font-size: medium;
 `;
 const Input = styled(Field)`
@@ -45,11 +46,7 @@ const Error = styled(ErrorMessage)`
   color: red;
 `;
 
-const OrderForm = () => {
-  const handleSubmit = (values, actions) => {
-    console.log(values);
-    actions.resetForm();
-  };
+const OrderForm = ({ handleSubmit }) => {
   return (
     <Section>
       <Title>Fill in the form</Title>

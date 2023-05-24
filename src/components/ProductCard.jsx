@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { CartProvider, useCart } from "react-use-cart";
+import { useCart } from "react-use-cart";
 
 const Card = styled.div`
   width: 250px;
