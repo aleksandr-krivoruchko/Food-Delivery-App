@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { CartProvider, useCart } from "react-use-cart";
 
 const Card = styled.div`
   width: 250px;
@@ -43,15 +44,18 @@ const Button = styled.button`
   }
 `;
 
-const ProductCard = ({ id, img, title, price }) => {
+const ProductCard = (prod) => {
+  const { addItem } = useCart();
   return (
     <Card>
       <Thumb>
-        <Image src={img} alt={title} />
+        <Image src={prod.img} alt={prod.title} />
       </Thumb>
-      <Title>{title}</Title>
-      <Price>{price}$</Price>
-      <Button type="button">Add to cart</Button>
+      <Title>{prod.title}</Title>
+      <Price>Price: {prod.price}$</Price>
+      <Button type="button" onClick={() => addItem(prod)}>
+        Add to cart
+      </Button>
     </Card>
   );
 };

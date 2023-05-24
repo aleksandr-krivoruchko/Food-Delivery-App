@@ -14,7 +14,7 @@ const List = styled.ul``;
 const Item = styled.li`
   margin-bottom: 1rem;
 `;
-const Button = styled.button`
+export const Button = styled.button`
   width: 10rem;
   height: auto;
   padding: 1.5rem;
@@ -27,16 +27,16 @@ const Button = styled.button`
   }
 `;
 
-const ShopList = () => {
-  const shops = ["McDonalds", "KFC", "Metro", "ATB", "Varus"];
-
+const ShopList = ({ shops, setSelectedShop }) => {
   return (
     <Section>
       <Title>Shops</Title>
       <List>
         {shops.map((shop) => (
-          <Item key={shop}>
-            <Button type="button">{shop}</Button>
+          <Item key={shop.id}>
+            <Button type="button" onClick={() => setSelectedShop(shop.id)}>
+              {shop.name}
+            </Button>
           </Item>
         ))}
       </List>

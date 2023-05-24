@@ -1,14 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-import ProductCard from "./ProductCard";
-
 const Section = styled.div`
   width: 80%;
   padding: 1rem;
 `;
 
-const List = styled.ul`
+const StyledList = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,18 +24,16 @@ const Item = styled.li`
   }
 `;
 
-const ProductList = ({ products }) => {
+const List = ({ items, children }) => {
   return (
     <Section>
-      <List>
-        {products.map(({ id, img, title, price }) => (
-          <Item key={id}>
-            <ProductCard id={id} img={img} title={title} price={price} />
-          </Item>
+      <StyledList>
+        {items.map((item) => (
+          <Item key={item.id}>{children}</Item>
         ))}
-      </List>
+      </StyledList>
     </Section>
   );
 };
 
-export default ProductList;
+export default List;

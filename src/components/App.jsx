@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { CartProvider, useCart } from "react-use-cart";
 
 import { Routes, Route } from "react-router-dom";
 import Shop from "../pages/Shop";
@@ -16,16 +17,18 @@ const Container = styled.div`
 
 const App = () => {
   return (
-    <Container>
-      <Navigation />
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Shop />} />
-          <Route path="cart" element={<ShoppingCart />} />
-          <Route path="*" element={<NotFoundPage />}></Route>
-        </Route>
-      </Routes>
-    </Container>
+    <CartProvider>
+      <Container>
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Shop />} />
+            <Route path="cart" element={<ShoppingCart />} />
+            <Route path="*" element={<NotFoundPage />}></Route>
+          </Route>
+        </Routes>
+      </Container>
+    </CartProvider>
   );
 };
 

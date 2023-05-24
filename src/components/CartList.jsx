@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-import ProductCard from "./ProductCard";
+import CartItem from "./CartItem";
 
 const Section = styled.div`
-  width: 80%;
+  width: 50%;
+  height: 95%;
   padding: 1rem;
+  overflow-y: scroll;
 `;
 
 const List = styled.ul`
@@ -16,7 +18,7 @@ const List = styled.ul`
   flex-wrap: wrap;
 `;
 const Item = styled.li`
-  flex: 0 0 30%;
+  width: 70%;
   background-color: aliceblue;
   border-radius: 0.8rem;
   -webkit-box-shadow: 5px -4px 15px -5px rgba(30, 130, 9, 0.53);
@@ -26,13 +28,19 @@ const Item = styled.li`
   }
 `;
 
-const ProductList = ({ products }) => {
+const CartList = ({ products }) => {
   return (
     <Section>
       <List>
-        {products.map(({ id, img, title, price }) => (
+        {products.map(({ id, img, title, price, quantity }) => (
           <Item key={id}>
-            <ProductCard id={id} img={img} title={title} price={price} />
+            <CartItem
+              id={id}
+              img={img}
+              title={title}
+              price={price}
+              quantity={quantity}
+            />
           </Item>
         ))}
       </List>
@@ -40,4 +48,4 @@ const ProductList = ({ products }) => {
   );
 };
 
-export default ProductList;
+export default CartList;
