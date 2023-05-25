@@ -30,9 +30,9 @@ const ProductList = ({ products }) => {
   return (
     <Section>
       <List>
-        {products.map(({ id, img, title, price }) => (
-          <Item key={id}>
-            <ProductCard id={id} img={img} title={title} price={price} />
+        {products.map(({ _id, img, title, price }) => (
+          <Item key={_id}>
+            <ProductCard id={_id} img={img} title={title} price={price} />
           </Item>
         ))}
       </List>

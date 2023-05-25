@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-
 import { useCart } from "react-use-cart";
 import CartList from "../components/CartList";
 import OrderForm from "../components/Form";
+import { createOrder } from "../services/getData";
 
 const Container = styled.div`
   display: flex;
@@ -28,6 +28,8 @@ const Message = styled.p`
   color: red;
 `;
 
+const ORDERS_URL = "http://localhost:3001/orders";
+
 const ShoppingCart = () => {
   const { isEmpty, items } = useCart();
   const calcTotalAmount = items.reduce((total, item) => {
@@ -43,12 +45,13 @@ const ShoppingCart = () => {
 
   const handleSubmit = (values, actions) => {
     const products = orderedProducts();
-    const buyerInfo = { ...values };
     const order = {
-      buyerInfo,
-      order: { products, orderPrice: `${calcTotalAmount}$` },
+      buyerInfo: { ...values },
+      orderInfo: { products, orderPrice: `${calcTotalAmount}$` },
     };
-    console.log(order);
+
+    createOrder(ORDERS_URL, order);
+
     actions.resetForm();
   };
 

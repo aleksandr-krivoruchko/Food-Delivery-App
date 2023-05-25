@@ -34,8 +34,8 @@ const ShopList = ({ shops, setSelectedShop }) => {
       <Title>Shops</Title>
       <List>
         {shops.map((shop) => (
-          <Item key={shop.id}>
-            <Button type="button" onClick={() => setSelectedShop(shop.id)}>
+          <Item key={shop._id}>
+            <Button type="button" onClick={() => setSelectedShop(shop.label)}>
               <Img src={shop.img} alt={shop.name} />
             </Button>
           </Item>

@@ -1,19 +1,23 @@
 import axios from "axios";
 
-export async function getData(url) {
+async function fetch(url) {
+  const response = await axios.get(url);
+  return response.data;
+}
+
+export function getData(url, cb) {
+  const fetchData = async () => {
+    const data = await fetch(url);
+    cb(data);
+  };
   try {
-    const response = await axios.get(url);
-    return response.data;
+    fetchData();
   } catch (error) {
-    throw error;
+    console.error();
   }
 }
 
-export async function getDataById(url, id) {
-  try {
-    const response = await axios.get(`${url}/${id}`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+export async function createOrder(url, obj) {
+  const response = await axios.post(url, obj);
+  return response;
 }
