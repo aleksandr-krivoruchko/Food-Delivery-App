@@ -26,6 +26,7 @@ export const Button = styled.button`
     background-color: #ff5599;
   }
 `;
+const Img = styled.img``;
 
 const ShopList = ({ shops, setSelectedShop }) => {
   return (
@@ -35,7 +36,7 @@ const ShopList = ({ shops, setSelectedShop }) => {
         {shops.map((shop) => (
           <Item key={shop.id}>
             <Button type="button" onClick={() => setSelectedShop(shop.id)}>
-              {shop.name}
+              <Img src={shop.img} alt={shop.name} />
             </Button>
           </Item>
         ))}

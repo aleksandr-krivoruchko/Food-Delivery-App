@@ -8,17 +8,17 @@ const Container = styled.div`
   display: flex;
 `;
 
-const SHOPS_URL = "http://localhost:3003/shops";
+const SHOPS_URL = "http://localhost:3001/data";
 
 const Shop = () => {
   const [shops, setShops] = useState([]);
   const [products, setProducts] = useState([]);
-  const [selectedShop, setSelectedShop] = useState(1);
+  const [selectedShop, setSelectedShop] = useState(3);
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await getData(SHOPS_URL);
-      setShops(data);
+      setShops(data.shops);
     };
     try {
       fetchData();

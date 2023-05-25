@@ -30,9 +30,9 @@ const Message = styled.p`
 
 const ShoppingCart = () => {
   const { isEmpty, items } = useCart();
-
   const calcTotalAmount = items.reduce((total, item) => {
-    return total + item.itemTotal;
+    const sum = Number(total) + Number(item.itemTotal);
+    return sum.toFixed(2);
   }, 0);
 
   const orderedProducts = () => {
@@ -42,11 +42,11 @@ const ShoppingCart = () => {
   };
 
   const handleSubmit = (values, actions) => {
-    const prod = orderedProducts();
+    const products = orderedProducts();
+    const buyerInfo = { ...values };
     const order = {
-      ...values,
-      products: prod,
-      orderPrice: `${calcTotalAmount}$`,
+      buyerInfo,
+      order: { products, orderPrice: `${calcTotalAmount}$` },
     };
     console.log(order);
     actions.resetForm();
