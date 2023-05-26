@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 async function fetch(url) {
   const response = await axios.get(url);
@@ -10,14 +11,15 @@ export function getData(url, cb) {
     const data = await fetch(url);
     cb(data);
   };
-  try {
-    fetchData();
-  } catch (error) {
-    console.error();
-  }
+  fetchData();
 }
 
 export async function createOrder(url, obj) {
-  const response = await axios.post(url, obj);
-  return response;
+  try {
+    const response = await axios.post(url, obj);
+    toast.success("Your order has been sent successfully");
+    return response;
+  } catch (error) {
+    toast.error(error.message);
+  }
 }

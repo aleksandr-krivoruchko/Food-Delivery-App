@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-
 import CartItem from "./CartItem";
+import EmptyCart from "./EmptyCart";
 
 const Section = styled.div`
   width: 50%;
@@ -28,9 +28,10 @@ const Item = styled.li`
   }
 `;
 
-const CartList = ({ products }) => {
+const CartList = ({ products, isEmpty }) => {
   return (
     <Section>
+      {isEmpty && <EmptyCart />}
       <List>
         {products.map(({ id, img, title, price, quantity }) => (
           <Item key={id}>

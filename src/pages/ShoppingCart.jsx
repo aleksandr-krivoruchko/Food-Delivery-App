@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { toast } from "react-toastify";
 import { useCart } from "react-use-cart";
 import CartList from "../components/CartList";
 import OrderForm from "../components/Form";
@@ -22,16 +23,11 @@ const Title = styled.h1`
   text-align: left;
   margin-left: 5rem;
 `;
-const Message = styled.p`
-  font-size: 2rem;
-  text-align: center;
-  color: red;
-`;
 
 const ORDERS_URL = "http://localhost:3001/orders";
 
 const ShoppingCart = () => {
-  const { isEmpty, items } = useCart();
+  const { isEmpty, items, emptyCart } = useCart();
   const calcTotalAmount = items.reduce((total, item) => {
     const sum = Number(total) + Number(item.itemTotal);
     return sum.toFixed(2);
@@ -44,6 +40,8 @@ const ShoppingCart = () => {
   };
 
   const handleSubmit = (values, actions) => {
+    if (isEmpty) return toast.info("Add item to cart");
+
     const products = orderedProducts();
     const order = {
       buyerInfo: { ...values },
@@ -51,11 +49,9 @@ const ShoppingCart = () => {
     };
 
     createOrder(ORDERS_URL, order);
-
     actions.resetForm();
+    emptyCart();
   };
-
-  if (isEmpty) return <Message>Your cart is empty</Message>;
 
   return (
     <Container>
@@ -66,7 +62,7 @@ const ShoppingCart = () => {
           {calcTotalAmount}$
         </Title>
       </Wrapper>
-      <CartList products={items}></CartList>
+      <CartList products={items} isEmpty={isEmpty}></CartList>
     </Container>
   );
 };

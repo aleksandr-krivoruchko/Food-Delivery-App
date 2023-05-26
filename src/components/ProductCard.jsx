@@ -32,12 +32,11 @@ const Price = styled.p`
 const Button = styled.button`
   padding: 0.6rem;
   border-radius: 1rem;
-  background-color: #ff9944;
+  background-color: #fcedc5;
   font-size: medium;
-  border: none;
   cursor: pointer;
   :hover {
-    background-color: #ff5599;
+    background-color: #ff9944;
   }
   :active {
     color: #fff;

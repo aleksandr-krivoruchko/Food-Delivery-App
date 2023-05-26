@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { CartProvider } from "react-use-cart";
 
 import { Routes, Route } from "react-router-dom";
@@ -28,6 +30,13 @@ const App = () => {
           </Route>
         </Routes>
       </Container>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </CartProvider>
   );
 };

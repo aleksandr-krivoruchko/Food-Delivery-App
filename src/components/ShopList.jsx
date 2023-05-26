@@ -19,11 +19,14 @@ export const Button = styled.button`
   height: auto;
   padding: 1.5rem;
   border-radius: 1rem;
-  background-color: #ff9944;
+  background-color: #fcedc5;
   font-size: large;
   cursor: pointer;
   :hover {
-    background-color: #ff5599;
+    background-color: #ff9944;
+  }
+  :active {
+    background-color: #fff;
   }
 `;
 const Img = styled.img``;
