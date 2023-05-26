@@ -1,20 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import OrderCard from "./OrderCard";
 
 const Section = styled.div`
   width: 80%;
   padding: 1rem;
 `;
 
-const StyledList = styled.ul`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-`;
+const StyledList = styled.ul``;
 const Item = styled.li`
-  flex: 0 0 30%;
+  margin-bottom: 0.8rem;
   background-color: aliceblue;
   border-radius: 0.8rem;
   -webkit-box-shadow: 5px -4px 15px -5px rgba(30, 130, 9, 0.53);
@@ -24,12 +19,14 @@ const Item = styled.li`
   }
 `;
 
-const List = ({ items, children }) => {
+const List = ({ orders }) => {
   return (
     <Section>
       <StyledList>
-        {items.map((item) => (
-          <Item key={item.id}>{children}</Item>
+        {orders.map((order) => (
+          <Item key={order._id}>
+            <OrderCard order={order} />
+          </Item>
         ))}
       </StyledList>
     </Section>

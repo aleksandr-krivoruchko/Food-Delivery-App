@@ -60,6 +60,9 @@ const Navigation = () => {
             <Link to="/cart">Shopping Cart</Link>
             {totalItems > 0 && <CartIcon>{totalItems}</CartIcon>}
           </Item>
+          <Item>
+            <Link to="/history">History</Link>
+          </Item>
         </List>
       </Navbar>
     </Header>

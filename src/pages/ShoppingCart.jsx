@@ -5,6 +5,7 @@ import { useCart } from "react-use-cart";
 import CartList from "../components/CartList";
 import OrderForm from "../components/Form";
 import { createOrder } from "../services/getData";
+import { URL } from "../services/URL.js";
 
 const Container = styled.div`
   display: flex;
@@ -24,10 +25,9 @@ const Title = styled.h1`
   margin-left: 5rem;
 `;
 
-const ORDERS_URL = "http://localhost:3001/orders";
-
 const ShoppingCart = () => {
   const { isEmpty, items, emptyCart } = useCart();
+
   const calcTotalAmount = items.reduce((total, item) => {
     const sum = Number(total) + Number(item.itemTotal);
     return sum.toFixed(2);
@@ -48,7 +48,7 @@ const ShoppingCart = () => {
       orderInfo: { products, orderPrice: `${calcTotalAmount}$` },
     };
 
-    createOrder(ORDERS_URL, order);
+    createOrder(URL.ORDERS, order);
     actions.resetForm();
     emptyCart();
   };
