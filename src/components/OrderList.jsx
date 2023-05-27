@@ -4,7 +4,10 @@ import OrderCard from "./OrderCard";
 
 const Section = styled.div`
   width: 80%;
+  height: 85vh;
+  margin: 0 auto;
   padding: 1rem;
+  overflow-y: scroll;
 `;
 
 const StyledList = styled.ul``;

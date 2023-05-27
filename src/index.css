@@ -35,3 +35,6 @@ ul {
 a {
   text-decoration-line: none;
 }
+.active-shop {
+  background-color: #ff9944 !important;
+}

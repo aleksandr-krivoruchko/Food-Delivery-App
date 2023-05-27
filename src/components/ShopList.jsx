@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import activeShop from "../services/activeShop";
 const Section = styled.div`
   width: 20%;
 `;
@@ -35,7 +35,7 @@ const ShopList = ({ shops, setSelectedShop }) => {
   return (
     <Section>
       <Title>Shops</Title>
-      <List>
+      <List onClick={activeShop}>
         {shops.map((shop) => (
           <Item key={shop._id}>
             <Button type="button" onClick={() => setSelectedShop(shop.label)}>

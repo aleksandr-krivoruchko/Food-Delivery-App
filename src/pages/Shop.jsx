@@ -7,12 +7,14 @@ import { URL } from "../services/URL.js";
 
 const Container = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Shop = () => {
   const [shops, setShops] = useState([]);
   const [products, setProducts] = useState([]);
-  const [selectedShop, setSelectedShop] = useState("kfc");
+  const [selectedShop, setSelectedShop] = useState(null);
 
   useEffect(() => {
     getData(URL.SHOPS, setShops);
@@ -37,7 +39,7 @@ const Shop = () => {
   return (
     <Container>
       <ShopList shops={shops} setSelectedShop={setSelectedShop} />
-      <ProductList products={products} />
+      {selectedShop && <ProductList products={products} />}
     </Container>
   );
 };
