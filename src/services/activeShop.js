@@ -1,12 +1,13 @@
 export default function activeShop(e) {
+  const activeClass = "active-shop";
+  const pressedBtn = e.target.closest("button");
   const btns = e.currentTarget.querySelectorAll("button");
 
   btns.forEach((btn) => {
-    if (btn.classList.contains("active-shop")) {
-      btn.classList.remove("active-shop");
-      e.target.closest("button").classList.add("active-shop");
-    } else {
-      e.target.closest("button").classList.add("active-shop");
+    if (btn.classList.contains(activeClass)) {
+      btn.classList.remove(activeClass);
+      pressedBtn.classList.add(activeClass);
     }
+    pressedBtn.classList.add(activeClass);
   });
 }

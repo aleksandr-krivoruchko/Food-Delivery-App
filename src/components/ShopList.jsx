@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import activeShop from "../services/activeShop";
+import Loader from "./Loader";
+
 const Section = styled.div`
   width: 20%;
 `;
@@ -35,15 +37,19 @@ const ShopList = ({ shops, setSelectedShop }) => {
   return (
     <Section>
       <Title>Shops</Title>
-      <List onClick={activeShop}>
-        {shops.map((shop) => (
-          <Item key={shop._id}>
-            <Button type="button" onClick={() => setSelectedShop(shop.label)}>
-              <Img src={shop.img} alt={shop.name} />
-            </Button>
-          </Item>
-        ))}
-      </List>
+      {shops ? (
+        <List onClick={activeShop}>
+          {shops.map((shop) => (
+            <Item key={shop._id}>
+              <Button type="button" onClick={() => setSelectedShop(shop.label)}>
+                <Img src={shop.img} alt={shop.name} />
+              </Button>
+            </Item>
+          ))}
+        </List>
+      ) : (
+        <Loader />
+      )}
     </Section>
   );
 };

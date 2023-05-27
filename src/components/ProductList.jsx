@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ProductCard from "./ProductCard";
+import Loader from "./Loader";
 
 const Section = styled.div`
   width: 80%;
@@ -28,13 +29,17 @@ const Item = styled.li`
 const ProductList = ({ products }) => {
   return (
     <Section>
-      <List>
-        {products.map(({ _id, img, title, price }) => (
-          <Item key={_id}>
-            <ProductCard id={_id} img={img} title={title} price={price} />
-          </Item>
-        ))}
-      </List>
+      {products ? (
+        <List>
+          {products.map(({ _id, img, title, price }) => (
+            <Item key={_id}>
+              <ProductCard id={_id} img={img} title={title} price={price} />
+            </Item>
+          ))}
+        </List>
+      ) : (
+        <Loader />
+      )}
     </Section>
   );
 };
