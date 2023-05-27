@@ -12,7 +12,7 @@ const Container = styled.div`
 const Shop = () => {
   const [shops, setShops] = useState([]);
   const [products, setProducts] = useState([]);
-  const [selectedShop, setSelectedShop] = useState("atb");
+  const [selectedShop, setSelectedShop] = useState("kfc");
 
   useEffect(() => {
     getData(URL.SHOPS, setShops);

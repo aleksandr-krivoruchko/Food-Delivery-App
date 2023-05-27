@@ -18,19 +18,6 @@ const Title = styled.p`
 const Text = styled.p`
   font-size: medium;
 `;
-const Button = styled.button`
-  padding: 0.6rem;
-  border-radius: 1rem;
-  background-color: #fcedc5;
-  font-size: medium;
-  cursor: pointer;
-  :hover {
-    background-color: #ff9944;
-  }
-  :active {
-    color: #fff;
-  }
-`;
 
 const OrderCard = ({ order }) => {
   const products = Object.keys(order.orderInfo.products);
@@ -48,8 +35,8 @@ const OrderCard = ({ order }) => {
 
       <Text>
         <b>Products: </b>
-        {products.map((i) => (
-          <span>{i}, </span>
+        {products.map((pr) => (
+          <span key={pr}>{pr}, </span>
         ))}
       </Text>
 

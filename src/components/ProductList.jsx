@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-
 import ProductCard from "./ProductCard";
 
 const Section = styled.div`

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { getData } from "../services/getData.js";
 import { URL } from "../services/URL.js";
 import OrderList from "../components/OrderList.jsx";
+
 const Container = styled.div`
   display: flex;
 `;
@@ -16,7 +17,7 @@ const History = () => {
 
   return (
     <Container>
-      <OrderList orders={orders}>qwewqeqwe</OrderList>
+      <OrderList orders={orders} />
     </Container>
   );
 };
