@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useCart } from "react-use-cart";
 import CartList from "../components/CartList";
 import OrderForm from "../components/Form";
+import Map from "../components/Map";
 import { createOrder } from "../services/getData";
 import { URL } from "../services/URL.js";
 
@@ -56,6 +57,7 @@ const ShoppingCart = () => {
   return (
     <Container>
       <Wrapper>
+        <Map />
         <OrderForm handleSubmit={handleSubmit} />
         <Title>
           Total price:
