@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Button } from "../components/ShopList";
+import Places from "./Places";
 
 const schema = Yup.object().shape({
   name: Yup.string()
@@ -31,7 +32,7 @@ const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
 `;
 const Label = styled.label`
   font-size: medium;
@@ -45,36 +46,36 @@ const Input = styled(Field)`
 const Error = styled(ErrorMessage)`
   color: red;
 `;
+const Wrapper = styled.div`
+  width: 80%;
+`;
 
-const OrderForm = ({ handleSubmit }) => {
+const OrderForm = ({ handleSubmit, setMarkerByAdress, mapRef }) => {
   return (
     <Section>
-      <Title>Fill in the form</Title>
       <Formik
         initialValues={{ name: "", email: "", phone: "", address: "" }}
         validationSchema={schema}
         onSubmit={handleSubmit}>
         {({ isSubmitting }) => (
           <StyledForm>
-            <div>
+            <Wrapper>
               <Label htmlFor="name">Name: </Label>
               <Input type="text" name="name" />
               <Error name="name" component="div" />
-            </div>
-            <div>
+            </Wrapper>
+            <Wrapper>
               <Label htmlFor="email">Email: </Label>
               <Input type="email" name="email" />
               <Error name="email" component="div" />
-            </div>
-            <div>
+            </Wrapper>
+            <Wrapper>
               <Label htmlFor="phone">Phone: </Label>
               <Input type="tel" name="phone" />
               <Error name="phone" component="div" />
-            </div>
-            <div>
-              <Label htmlFor="address">Address: </Label>
-              <Input type="text" name="address" />
-            </div>
+            </Wrapper>
+
+            <Places setMarkerByAdress={setMarkerByAdress} mapRef={mapRef} />
 
             <Button type="submit" disabled={isSubmitting}>
               Submit
