@@ -28,12 +28,11 @@ const Title = styled.h1`
   text-align: left;
   margin-left: 5rem;
 `;
-const places = ["places"];
 
 const ShoppingCart = () => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: API_KEY,
-    libraries: places,
+    libraries: ["places"],
   });
   const mapRef = React.useRef();
   const { isEmpty, items, emptyCart } = useCart();

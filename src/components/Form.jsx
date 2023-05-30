@@ -22,11 +22,6 @@ const Section = styled.div`
   margin: 1rem;
 `;
 
-const Title = styled.h2`
-  text-align: center;
-  margin-bottom: 1rem;
-`;
-
 const StyledForm = styled(Form)`
   width: 100%;
   display: flex;
@@ -60,18 +55,24 @@ const OrderForm = ({ handleSubmit, setMarkerByAdress, mapRef }) => {
         {({ isSubmitting }) => (
           <StyledForm>
             <Wrapper>
-              <Label htmlFor="name">Name: </Label>
-              <Input type="text" name="name" />
+              <Label>
+                Name:
+                <Input type="text" name="name" />{" "}
+              </Label>
               <Error name="name" component="div" />
             </Wrapper>
+
             <Wrapper>
-              <Label htmlFor="email">Email: </Label>
-              <Input type="email" name="email" />
+              <Label>
+                Email: <Input type="email" name="email" />
+              </Label>
               <Error name="email" component="div" />
             </Wrapper>
+
             <Wrapper>
-              <Label htmlFor="phone">Phone: </Label>
-              <Input type="tel" name="phone" />
+              <Label>
+                Phone: <Input type="tel" name="phone" />
+              </Label>
               <Error name="phone" component="div" />
             </Wrapper>
 

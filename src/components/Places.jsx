@@ -47,16 +47,6 @@ const Places = ({ setMarkerByAdress, mapRef }) => {
       });
     };
 
-  //   const handleSelect = async (address) => {
-  //     setValue(address, false);
-  //     clearSuggestions();
-
-  //     const results = await getGeocode({ address: address });
-  //     const { lat, lng } = await getLatLng(results[0]);
-  //     setMarkerByAdress({ lat, lng });
-  //     mapRef.current?.panTo({ lat, lng });
-  //   };
-
   const renderSuggestions = () =>
     data.map((suggestion) => {
       const {
@@ -73,13 +63,15 @@ const Places = ({ setMarkerByAdress, mapRef }) => {
 
   return (
     <Wrapper>
-      <Label htmlFor="address">Address: </Label>
-      <Input
-        value={value}
-        onChange={handleInput}
-        disabled={!ready}
-        name="address"
-      />
+      <Label>
+        Address:
+        <Input
+          value={value}
+          onChange={handleInput}
+          disabled={!ready}
+          name="address"
+        />
+      </Label>
       {status === "OK" && <ul>{renderSuggestions()}</ul>}
     </Wrapper>
   );

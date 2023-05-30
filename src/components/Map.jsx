@@ -1,17 +1,19 @@
 import React from "react";
 import { Circle, GoogleMap, Marker } from "@react-google-maps/api";
+import personIcon from "../icons/person-icon.png";
+import mcdIcon from "../icons/mcd-icon.png";
+import kfcIcon from "../icons/kfc-icon.png";
+import atbIcon from "../icons/atb-icon.png";
 
 const containerStyle = {
   width: "95%",
   height: "35vh",
 };
 
-const mcdPositions = [
-  { id: 1, lat: "48.477930", lng: "35.018930" },
-  { id: 2, lat: "48.485400", lng: "34.922480" },
-  { id: 3, lat: "48.432050", lng: "35.003480" },
-  { id: 4, lat: "47.834370", lng: "35.147630" },
-  { id: 5, lat: "47.834370", lng: "35.147630" },
+const mcdLocations = [
+  { id: 1, lat: 48.47793, lng: 35.01893 },
+  { id: 2, lat: 48.4854, lng: 34.92248 },
+  { id: 3, lat: 48.43205, lng: 35.00348 },
 ];
 const kfcPositions = [
   { id: 1, lat: "", lng: "" },
@@ -52,8 +54,15 @@ function Map({ markerByAdress, mapRef }) {
       onLoad={onLoad}>
       {markerByAdress && (
         <>
-          <Marker position={markerByAdress} />
-          <Circle center={markerByAdress} radius={5000} />
+          <Marker position={markerByAdress} icon={personIcon} />
+          {/* <Circle center={markerByAdress} radius={5000} /> */}
+          {mcdLocations.map((loc) => {
+            const position = {
+              lat: loc.lat,
+              lng: loc.lng,
+            };
+            return <Marker key={loc.lat} position={position} icon={mcdIcon} />;
+          })}
         </>
       )}
     </GoogleMap>
@@ -61,6 +70,3 @@ function Map({ markerByAdress, mapRef }) {
 }
 
 export default React.memo(Map);
-
-/*streetViewControl: false,
-        mapTypeControl: false,*/
