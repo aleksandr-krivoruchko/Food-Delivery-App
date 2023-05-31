@@ -1,5 +1,5 @@
 import React from "react";
-import { Circle, GoogleMap, Marker } from "@react-google-maps/api";
+import { GoogleMap, Marker, DirectionsRenderer } from "@react-google-maps/api";
 import personIcon from "../icons/person-icon.png";
 import mcdIcon from "../icons/mcd-icon.png";
 import kfcIcon from "../icons/kfc-icon.png";
@@ -15,22 +15,23 @@ const mcdLocations = [
   { id: 2, lat: 48.4854, lng: 34.92248 },
   { id: 3, lat: 48.43205, lng: 35.00348 },
 ];
-const kfcPositions = [
-  { id: 1, lat: "", lng: "" },
-  { id: 2, lat: "", lng: "" },
-  { id: 3, lat: "", lng: "" },
-  { id: 4, lat: "", lng: "" },
-  { id: 5, lat: "", lng: "" },
-];
-const atbPositions = [
-  { id: 1, lat: "", lng: "" },
-  { id: 2, lat: "", lng: "" },
-  { id: 3, lat: "", lng: "" },
-  { id: 4, lat: "", lng: "" },
-  { id: 5, lat: "", lng: "" },
-];
+// const kfcPositions = [
+//   { id: 1, lat: "", lng: "" },
+//   { id: 2, lat: "", lng: "" },
+//   { id: 3, lat: "", lng: "" },
+//   { id: 4, lat: "", lng: "" },
+//   { id: 5, lat: "", lng: "" },
+// ];
+// const atbPositions = [
+//   { id: 1, lat: "", lng: "" },
+//   { id: 2, lat: "", lng: "" },
+//   { id: 3, lat: "", lng: "" },
+//   { id: 4, lat: "", lng: "" },
+//   { id: 5, lat: "", lng: "" },
+// ];
 
 function Map({ markerByAdress, mapRef }) {
+  const [directions, setDirections] = React.useState();
   const center = React.useMemo(
     () => ({
       lat: 48.473301,
@@ -39,10 +40,35 @@ function Map({ markerByAdress, mapRef }) {
     []
   );
   const options = React.useMemo(
-    () => ({ disableDefaultUI: true, clickableIcons: false }),
+    () => ({
+      disableDefaultUI: true,
+      clickableIcons: false,
+      fullscreenControl: true,
+      fullscreenControlOptions: {
+        position: window.google.maps.ControlPosition.RIGHT_BOTTOM,
+      },
+    }),
     []
   );
   const onLoad = React.useCallback((map) => (mapRef.current = map), []);
+
+  const fetchDirections = (shop) => {
+    if (!markerByAdress) return;
+
+    const service = new window.google.maps.DirectionsService();
+    service.route(
+      {
+        origin: shop,
+        destination: markerByAdress,
+        travelMode: window.google.maps.TravelMode.DRIVING,
+      },
+      (result, status) => {
+        if (status === "OK" && result) {
+          setDirections(result);
+        }
+      }
+    );
+  };
 
   return (
     <GoogleMap
@@ -52,16 +78,23 @@ function Map({ markerByAdress, mapRef }) {
       zoom={13}
       options={options}
       onLoad={onLoad}>
+      {directions && <DirectionsRenderer directions={directions} />}
       {markerByAdress && (
         <>
           <Marker position={markerByAdress} icon={personIcon} />
-          {/* <Circle center={markerByAdress} radius={5000} /> */}
-          {mcdLocations.map((loc) => {
+          {mcdLocations.map((location) => {
             const position = {
-              lat: loc.lat,
-              lng: loc.lng,
+              lat: location.lat,
+              lng: location.lng,
             };
-            return <Marker key={loc.lat} position={position} icon={mcdIcon} />;
+            return (
+              <Marker
+                key={location.lat}
+                position={position}
+                icon={mcdIcon}
+                onClick={() => fetchDirections(position)}
+              />
+            );
           })}
         </>
       )}
