@@ -1,5 +1,10 @@
 import React from "react";
-import { GoogleMap, Marker, DirectionsRenderer } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  Marker,
+  DirectionsRenderer,
+  InfoWindow,
+} from "@react-google-maps/api";
 import personIcon from "../icons/person-icon.png";
 import mcdIcon from "../icons/mcd-icon.png";
 import kfcIcon from "../icons/kfc-icon.png";
@@ -41,6 +46,7 @@ function Map({ markerByAdress, mapRef }) {
   );
   const options = React.useMemo(
     () => ({
+      mapId: "3a0693771e89ae27",
       disableDefaultUI: true,
       clickableIcons: false,
       fullscreenControl: true,
@@ -64,6 +70,9 @@ function Map({ markerByAdress, mapRef }) {
       },
       (result, status) => {
         if (status === "OK" && result) {
+          console.log(result.routes[0].legs[0].distance.text);
+          console.log(result.routes[0].legs[0].duration.text);
+
           setDirections(result);
         }
       }
@@ -78,7 +87,14 @@ function Map({ markerByAdress, mapRef }) {
       zoom={13}
       options={options}
       onLoad={onLoad}>
-      {directions && <DirectionsRenderer directions={directions} />}
+      {directions && (
+        <DirectionsRenderer
+          directions={directions}
+          options={{
+            polylineOptions: { strokeColor: "red", strokeWeight: 5 },
+          }}
+        />
+      )}
       {markerByAdress && (
         <>
           <Marker position={markerByAdress} icon={personIcon} />
