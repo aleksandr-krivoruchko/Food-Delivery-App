@@ -10,6 +10,7 @@ import { createOrder } from "../services/getData";
 import { URL } from "../services/URL.js";
 
 const API_KEY = "AIzaSyCQyuuAXod4n8QtPWXn6zUeb9tXtLL74g4";
+const places = ["places"];
 
 const Container = styled.div`
   display: flex;
@@ -32,7 +33,7 @@ const Title = styled.h1`
 const ShoppingCart = () => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: API_KEY,
-    libraries: ["places"],
+    libraries: places,
   });
   const mapRef = React.useRef();
   const { isEmpty, items, emptyCart } = useCart();

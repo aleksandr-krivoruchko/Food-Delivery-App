@@ -1,4 +1,5 @@
 const BASE_URL = "https://food-delivery-app-api.onrender.com";
+// const BASE_URL = "http://localhost:3001";
 
 export const URL = {
   SHOPS: `${BASE_URL}/shops`,

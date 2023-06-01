@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-toastify";
 import { GoogleMap, Marker, DirectionsRenderer } from "@react-google-maps/api";
 import personIcon from "../icons/person-icon.png";
 import mcdIcon from "../icons/mcd-icon.png";
@@ -65,9 +66,10 @@ function Map({ markerByAdress, mapRef }) {
       },
       (result, status) => {
         if (status === "OK" && result) {
-          console.log(result.routes[0].legs[0].distance.text);
-          console.log(result.routes[0].legs[0].duration.text);
-
+          toast.info(
+            `Delivery distance: ${result.routes[0].legs[0].distance.text}
+				Delivery time: ${result.routes[0].legs[0].duration.text}`
+          );
           setDirections(result);
         }
       }
@@ -79,7 +81,7 @@ function Map({ markerByAdress, mapRef }) {
       ref={mapRef}
       mapContainerStyle={containerStyle}
       center={center}
-      zoom={13}
+      zoom={11}
       options={options}
       onLoad={onLoad}>
       {directions && (

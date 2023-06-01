@@ -28,7 +28,11 @@ const Places = ({ setMarkerByAdress, mapRef }) => {
     suggestions: { status, data },
     setValue,
     clearSuggestions,
-  } = usePlacesAutocomplete();
+  } = usePlacesAutocomplete({
+    callbackName: () => {},
+    requestOptions: {},
+    debounce: 300,
+  });
 
   const handleInput = (e) => {
     setValue(e.target.value);

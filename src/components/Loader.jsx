@@ -5,6 +5,7 @@ import { FidgetSpinner } from "react-loader-spinner";
 const Container = styled.div`
   height: 80vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
@@ -12,6 +13,7 @@ const Container = styled.div`
 const Loader = () => {
   return (
     <Container>
+      <h3>Be patient)</h3>
       <FidgetSpinner
         visible={true}
         height="80"

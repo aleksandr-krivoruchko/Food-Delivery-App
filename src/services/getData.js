@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-async function fetch(url) {
+export async function fetch(url) {
   const response = await axios.get(url);
   return response.data;
 }
@@ -12,7 +12,6 @@ export function getData(url, cb) {
     cb(data);
   };
   fetchData();
-  return true;
 }
 
 export async function createOrder(url, obj) {

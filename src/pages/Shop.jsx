@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { getData } from "../services/getData.js";
+import { fetch, getData } from "../services/getData.js";
 import ShopList from "../components/ShopList";
 import ProductList from "../components/ProductList";
 import { URL } from "../services/URL.js";
@@ -11,17 +11,21 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
+const ErrorText = styled.h3``;
 
 const Shop = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [shops, setShops] = useState([]);
   const [products, setProducts] = useState([]);
   const [selectedShop, setSelectedShop] = useState(null);
 
   useEffect(() => {
-    if (getData(URL.SHOPS, setShops)) {
-      setLoading(false);
-    }
+    setLoading(true);
+    fetch(URL.SHOPS)
+      .then((shops) => setShops(shops))
+      .catch((error) => setError(error))
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
@@ -46,6 +50,9 @@ const Shop = () => {
         <ShopList shops={shops} setSelectedShop={setSelectedShop} />
       ) : (
         <Loader />
+      )}
+      {error && (
+        <ErrorText>Whoops, something went wrong: {error.message}</ErrorText>
       )}
       {selectedShop && <ProductList products={products} />}
     </Container>
