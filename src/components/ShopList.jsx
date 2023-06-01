@@ -1,15 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import activeShop from "../services/activeShop";
-import Loader from "./Loader";
 
 const Section = styled.div`
   width: 20%;
-`;
-
-const Title = styled.h2`
-  margin-bottom: 2rem;
-  text-align: center;
 `;
 
 const List = styled.ul``;
@@ -36,20 +30,15 @@ const Img = styled.img``;
 const ShopList = ({ shops, setSelectedShop }) => {
   return (
     <Section>
-      <Title>Shops</Title>
-      {shops ? (
-        <List onClick={activeShop}>
-          {shops.map((shop) => (
-            <Item key={shop._id}>
-              <Button type="button" onClick={() => setSelectedShop(shop.label)}>
-                <Img src={shop.img} alt={shop.name} />
-              </Button>
-            </Item>
-          ))}
-        </List>
-      ) : (
-        <Loader />
-      )}
+      <List onClick={activeShop}>
+        {shops.map((shop) => (
+          <Item key={shop._id}>
+            <Button type="button" onClick={() => setSelectedShop(shop.label)}>
+              <Img src={shop.img} alt={shop.name} />
+            </Button>
+          </Item>
+        ))}
+      </List>
     </Section>
   );
 };

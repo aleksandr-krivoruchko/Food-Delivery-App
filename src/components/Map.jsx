@@ -1,14 +1,9 @@
 import React from "react";
-import {
-  GoogleMap,
-  Marker,
-  DirectionsRenderer,
-  InfoWindow,
-} from "@react-google-maps/api";
+import { GoogleMap, Marker, DirectionsRenderer } from "@react-google-maps/api";
 import personIcon from "../icons/person-icon.png";
 import mcdIcon from "../icons/mcd-icon.png";
-import kfcIcon from "../icons/kfc-icon.png";
-import atbIcon from "../icons/atb-icon.png";
+// import kfcIcon from "../icons/kfc-icon.png";
+// import atbIcon from "../icons/atb-icon.png";
 
 const containerStyle = {
   width: "95%",
@@ -56,7 +51,7 @@ function Map({ markerByAdress, mapRef }) {
     }),
     []
   );
-  const onLoad = React.useCallback((map) => (mapRef.current = map), []);
+  const onLoad = React.useCallback((map) => (mapRef.current = map), [mapRef]);
 
   const fetchDirections = (shop) => {
     if (!markerByAdress) return;

@@ -12,6 +12,7 @@ export function getData(url, cb) {
     cb(data);
   };
   fetchData();
+  return true;
 }
 
 export async function createOrder(url, obj) {

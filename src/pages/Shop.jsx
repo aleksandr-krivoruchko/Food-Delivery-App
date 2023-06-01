@@ -4,6 +4,7 @@ import { getData } from "../services/getData.js";
 import ShopList from "../components/ShopList";
 import ProductList from "../components/ProductList";
 import { URL } from "../services/URL.js";
+import Loader from "../components/Loader.jsx";
 
 const Container = styled.div`
   display: flex;
@@ -12,12 +13,15 @@ const Container = styled.div`
 `;
 
 const Shop = () => {
+  const [loading, setLoading] = useState(true);
   const [shops, setShops] = useState([]);
   const [products, setProducts] = useState([]);
   const [selectedShop, setSelectedShop] = useState(null);
 
   useEffect(() => {
-    getData(URL.SHOPS, setShops);
+    if (getData(URL.SHOPS, setShops)) {
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => {
@@ -38,7 +42,11 @@ const Shop = () => {
 
   return (
     <Container>
-      <ShopList shops={shops} setSelectedShop={setSelectedShop} />
+      {!loading ? (
+        <ShopList shops={shops} setSelectedShop={setSelectedShop} />
+      ) : (
+        <Loader />
+      )}
       {selectedShop && <ProductList products={products} />}
     </Container>
   );
