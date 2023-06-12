@@ -1,6 +1,11 @@
 import React from "react";
 import { toast } from "react-toastify";
-import { GoogleMap, Marker, DirectionsRenderer } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  Marker,
+  DirectionsRenderer,
+  InfoWindow,
+} from "@react-google-maps/api";
 import personIcon from "../icons/person-icon.png";
 import mcdIcon from "../icons/mcd-icon.png";
 import getRandomShopLocations from "../services/getRandomShopLocations";
@@ -11,7 +16,9 @@ const containerStyle = {
 };
 
 function Map({ markerByAdress, mapRef }) {
-  const [directions, setDirections] = React.useState();
+  const [directions, setDirections] = React.useState(null);
+  const [selectedMarker, setSelectedMarker] = React.useState("");
+
   const center = React.useMemo(
     () => ({
       lat: 48.473301,
@@ -19,6 +26,7 @@ function Map({ markerByAdress, mapRef }) {
     }),
     []
   );
+
   const options = React.useMemo(
     () => ({
       mapId: "3a0693771e89ae27",
@@ -71,6 +79,7 @@ function Map({ markerByAdress, mapRef }) {
           }}
         />
       )}
+
       {markerByAdress && (
         <>
           <Marker position={markerByAdress} icon={personIcon} />
@@ -80,11 +89,27 @@ function Map({ markerByAdress, mapRef }) {
                 key={location.lat * Math.random()}
                 position={location}
                 icon={mcdIcon}
-                onClick={() => fetchDirections(location)}
+                onClick={() => {
+                  fetchDirections(location);
+                  setSelectedMarker(location);
+                }}
               />
             );
           })}
         </>
+      )}
+
+      {selectedMarker && (
+        <InfoWindow position={selectedMarker}>
+          <div>
+            <h5>
+              Delivery distance: {directions?.routes[0].legs[0].distance.text}
+            </h5>
+            <h5>
+              Delivery time: {directions?.routes[0].legs[0].duration.text}
+            </h5>
+          </div>
+        </InfoWindow>
       )}
     </GoogleMap>
   );
